@@ -5,21 +5,15 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-# --- START OF UPDATED LINES ---
-# 1. Accept the arguments
-ARG VITE_EMAILJS_SERVICE_ID
-ARG VITE_EMAILJS_PUBLIC_KEY
-ARG VITE_EMAILJS_TEMPLATE_ADMIN
-ARG VITE_EMAILJS_TEMPLATE_CUSTOMER
-ARG VITE_GEMINI_API_KEY 
+# ... (Top of your Dockerfile)
 
-# 2. Set environment variables for the build process
-ENV VITE_EMAILJS_SERVICE_ID=$VITE_EMAILJS_SERVICE_ID
-ENV VITE_EMAILJS_PUBLIC_KEY=$VITE_EMAILJS_PUBLIC_KEY
-ENV VITE_EMAILJS_TEMPLATE_ADMIN=$VITE_EMAILJS_TEMPLATE_ADMIN
-ENV VITE_EMAILJS_TEMPLATE_CUSTOMER=$VITE_EMAILJS_TEMPLATE_CUSTOMER
+# 1. Accept the argument with the NEW name
+ARG VITE_GEMINI_API_KEY
+
+# 2. Set the environment variable so Vite can see it
 ENV VITE_GEMINI_API_KEY=$VITE_GEMINI_API_KEY
-# --- END OF UPDATED LINES ---
+
+# ... (Rest of your Dockerfile, e.g., RUN npm run build)
 
 RUN npm run build
 
