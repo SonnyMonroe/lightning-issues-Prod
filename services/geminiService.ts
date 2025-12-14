@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { IssueSuggestion, IssueType } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
 export const parseRepoUrl = (url: string): { owner: string; name: string } | null => {
   try {
